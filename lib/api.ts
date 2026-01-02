@@ -6,6 +6,11 @@ export interface NotesProps {
   totalPages: number;
 }
 
+export interface FetchNotesResponse {
+  notes: Note[];
+  totalPages: number;
+}
+
 export interface CreateNoteProps {
   title: string;
   content: string;
