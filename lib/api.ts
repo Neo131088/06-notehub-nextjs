@@ -1,16 +1,16 @@
 import axios from 'axios';
 import type { Note, NoteTag } from '@/types/note';
 
-const token = process.env.NEXT_PUBLIC_TMDB_TOKEN as string | undefined;
+const NOTEHUB_TOKEN = process.env.NEXT_PUBLIC_TMDB_TOKEN as string | undefined;
 
-if (!token) {
-  throw new Error('NEXT_PUBLIC_TMDB_TOKEN is missing');
+if (!NOTEHUB_TOKEN) {
+  throw new Error('NEXT_PUBLIC_NOTEHUB_TOKEN is missing');
 }
 
 const api = axios.create({
   baseURL: 'https://notehub-public.goit.study/api',
   headers: {
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${NOTEHUB_TOKEN}`,
     'Cache-Control': 'no-store',
   },
 
