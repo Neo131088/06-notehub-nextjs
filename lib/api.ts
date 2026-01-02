@@ -20,24 +20,13 @@ export interface CreateNoteProps {
 axios.defaults.baseURL = 'https://notehub-public.goit.study/api';
 const NOTEHUB_TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
-export async function fetchNotes(
-  page: number,
-  search: string
-): Promise<NotesProps> {
-  const { data } = await axios.get<NotesProps>('/notes', {
-    params: {
-      page: `${page}`,
-      perPage: 12,
-      search: `${search}`,
-    },
-    headers: {
-      accept: 'application/json',
-      Authorization: `Bearer ${NOTEHUB_TOKEN}`,
-    },
+export const fetchNotes = async (params: FetchNotesParams) => {
+  const { data } = await api.get<FetchNotesResponse>('/notes', {
+    params,
   });
 
   return data;
-}
+};
 
 export async function createNote(data: CreateNoteProps) {
   const res = await axios.post<Note>('/notes', data, {
@@ -71,3 +60,14 @@ export async function fetchNoteById(noteId: Note['id']) {
 
   return data;
 }
+export interface FetchNotesParams {
+  page?: number;
+  perPage?: number;
+  search?: string;
+}
+export const api = axios.create({
+  baseURL: 'https://notehub-public.goit.study/api',
+  headers: {
+    Authorization: `Bearer ${NOTEHUB_TOKEN}`,
+  },
+});
