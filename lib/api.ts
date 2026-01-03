@@ -10,6 +10,7 @@ export interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
 }
+export type CreateNotePayload = CreateNoteProps;
 
 export interface CreateNoteProps {
   title: string;
