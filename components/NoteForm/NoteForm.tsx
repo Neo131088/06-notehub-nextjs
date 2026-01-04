@@ -8,6 +8,7 @@ import type { CreateNotePayload } from '@/lib/api';
 import type { NoteTag } from '../../types/note';
 
 interface NoteFormProps {
+  page: number; 
   onClose: () => void;
 }
 
