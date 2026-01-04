@@ -1,14 +1,13 @@
 import axios from 'axios';
 import type { Note } from '../types/note';
 
-/* ================== TYPES ================== */
+
 
 export interface FetchNotesParams {
   page?: number;
   perPage?: number;
   search?: string;
 }
-
 
 export interface FetchNotesResponse {
   notes: Note[];
@@ -23,7 +22,7 @@ export interface CreateNoteProps {
 
 export type CreateNotePayload = CreateNoteProps;
 
-/* ================== API INSTANCE ================== */
+
 
 const NOTEHUB_TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
@@ -39,7 +38,6 @@ export const api = axios.create({
   },
 });
 
-/* ================== REQUESTS ================== */
 
 export async function fetchNotes(
   params: FetchNotesParams
@@ -63,8 +61,9 @@ export async function createNote(
 
 export async function deleteNote(
   id: Note['id']
-): Promise<void> {
-  await api.delete(`/notes/${id}`);
+): Promise<Note> {
+  const { data } = await api.delete<Note>(`/notes/${id}`);
+  return data;
 }
 
 export async function fetchNoteById(
